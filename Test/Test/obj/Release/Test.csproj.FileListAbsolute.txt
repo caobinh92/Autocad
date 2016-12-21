@@ -1,0 +1,5 @@
+E:\1. Work\1. Work\Autocad .net\C#\Test\Test\bin\Release\Test.dll
+E:\1. Work\1. Work\Autocad .net\C#\Test\Test\bin\Release\Test.pdb
+E:\1. Work\1. Work\Autocad .net\C#\Test\Test\obj\Release\Test.csprojResolveAssemblyReference.cache
+E:\1. Work\1. Work\Autocad .net\C#\Test\Test\obj\Release\Test.dll
+E:\1. Work\1. Work\Autocad .net\C#\Test\Test\obj\Release\Test.pdb
