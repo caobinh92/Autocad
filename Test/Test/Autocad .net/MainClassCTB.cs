@@ -25,7 +25,7 @@ namespace Test
         public DBObjectCollection acBlkTblRecCol;
         public int[] acAttRefIDCol;
 
-        [CommandMethod("ReplaceTitle", CommandFlags.Session)]
+        [CommandMethod("ReplaceTitle", CommandFlags.Session & CommandFlags.Interruptible)]
         public void ReplaceTitle()
         {
             // Step 1: CREATE INSTANCE OF SUBCLASS

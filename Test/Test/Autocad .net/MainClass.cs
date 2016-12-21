@@ -96,95 +96,111 @@ namespace Test
                     if (acFrm.IsButtonBlockReferenceClicked)
                     {
                         acBlkRef = acSC.GetBlockReference(acDoc, acTrans, "Pick a title block", " Pick a title block");  //BlockReferece Origin
-                        acBlkTblRec = (BlockTableRecord)acTrans.GetObject(acBlkRef.BlockTableRecord, OpenMode.ForRead); //BlockTableRecord
-                        Point3d acPt1 = acSC.GetPoint3dFromPrompt(acDoc, "Pick first point"); Point3d acPt2 = acSC.GetPoint3dFromPrompt(acDoc, "Pick second point");  //TwoPoints
-                        acVec3dOrgArr = acSC.GetTwoVectors3dDefinedExtents3d(acBlkRef, acPt1, acPt2, 1);  //TwoVectors Orgin
-                        acScl3dOrg = acBlkRef.ScaleFactors;  //Scale Origin
-                        //acBlkRefCol = acSC.GetBlockReferenceCollectionByName(acDocMgr, acBlkRef.Name);  //Get All Block Reference In Document Collection
-                        //Application.ShowAlertDialog(acBlkRefCol.Count.ToString());
-                        //acExt3dCol = acSC.GetExtents3dBlockReferenceCollection(acDocMgr, acBlkRef.Name, acVec3dOrgArr, acScl3dOrg); //Get All Extent3d In Document Collection
-                        //Application.ShowAlertDialog(acExt3dCol.Length.ToString());
-                        //DBText acDbTxt; acDbTxt.
-
-                        acFrm.txtBlkTblRecNam.Text = acBlkRef.Name;  //Name
-                        //DBObjectCollection acBlkTblRecCol = acSC.GetBlockTableRecordCollection(acDocMgr);
-                        //acFrm.AttributeDefinitionCollection = acSC.GetAttributeDefinitionNameAllCollection(acDocMgr, acBlkTblRecCol);
-                        acFrm.AttributeDefinitionCollection = acSC.GetAttributeDefinitionNameCollection(acDoc, acTrans, acBlkTblRec);
-                        //acFrm.AttributeDefinitionCollection = acSC.GetAttributeDefinitionNameCollection(acDoc,acTrans, acBlkTblRec);  //AttributeDefinition Collection
-                        acFrm.CreateAttributeDefinitionCollection(); //Create ComboBoxAttributeDefinition
-                        if (acFrm.cbbAttDef.Items.Count != 0)
+                        if (acBlkRef != null)
                         {
-                            acFrm.cbbAttDef.Enabled = true; acFrm.rbtAttribute.Enabled = true;
-                        }
-                        else { acFrm.cbbAttDef.Enabled = false; acFrm.rbtAttribute.Enabled = false; }
+                            acBlkTblRec = (BlockTableRecord)acTrans.GetObject(acBlkRef.BlockTableRecord, OpenMode.ForRead); //BlockTableRecord
+                            Point3d acPt1 = acSC.GetPoint3dFromPrompt(acDoc, "Pick first point");
+                            if (acPt1.Z !=50)
+                            {
+                                Point3d acPt2 = acSC.GetPoint3dFromPrompt(acDoc, "Pick second point");  //TwoPoints
+                                if (acPt2.Z != 50) 
+                                {
+                                    acVec3dOrgArr = acSC.GetTwoVectors3dDefinedExtents3d(acBlkRef, acPt1, acPt2, 1);  //TwoVectors Orgin
+                                    acScl3dOrg = acBlkRef.ScaleFactors;  //Scale Origin
+                                    //acBlkRefCol = acSC.GetBlockReferenceCollectionByName(acDocMgr, acBlkRef.Name);  //Get All Block Reference In Document Collection
+                                    //Application.ShowAlertDialog(acBlkRefCol.Count.ToString());
+                                    //acExt3dCol = acSC.GetExtents3dBlockReferenceCollection(acDocMgr, acBlkRef.Name, acVec3dOrgArr, acScl3dOrg); //Get All Extent3d In Document Collection
+                                    //Application.ShowAlertDialog(acExt3dCol.Length.ToString());
+                                    //DBText acDbTxt; acDbTxt.
 
+                                    acFrm.txtBlkTblRecNam.Text = acBlkRef.Name;  //Name
+                                    //DBObjectCollection acBlkTblRecCol = acSC.GetBlockTableRecordCollection(acDocMgr);
+                                    //acFrm.AttributeDefinitionCollection = acSC.GetAttributeDefinitionNameAllCollection(acDocMgr, acBlkTblRecCol);
+                                    acFrm.AttributeDefinitionCollection = acSC.GetAttributeDefinitionNameCollection(acDoc, acTrans, acBlkTblRec);
+                                    //acFrm.AttributeDefinitionCollection = acSC.GetAttributeDefinitionNameCollection(acDoc,acTrans, acBlkTblRec);  //AttributeDefinition Collection
+                                    acFrm.CreateAttributeDefinitionCollection(); //Create ComboBoxAttributeDefinition
+                                    if (acFrm.cbbAttDef.Items.Count != 0)
+                                    {
+                                        acFrm.cbbAttDef.Enabled = true; acFrm.rbtAttribute.Enabled = true;
+                                    }
+                                    else { acFrm.cbbAttDef.Enabled = false; acFrm.rbtAttribute.Enabled = false; }
+                                    acFrm.btnClose.Enabled = true;
+                                }
+                            }
+                        }
                         acFrm.IsButtonBlockReferenceClicked = false;
-                        acFrm.btnClose.Enabled = true;
                         //acFrm.ShowDialog();
                     }
 
                     // Step 8: CHECK IF BUTTON QUERY TEXT PROMPT CLICKED -> TRUE: ADD TEXT 
                     if (acFrm.IsButtonTextPromptClicked)
                     {
-                        Point3d acPt1 = acSC.GetPoint3dFromPrompt(acDoc, "Pick first point"); Point3d acPt2 = acSC.GetPoint3dFromPrompt(acDoc, "Pick second point");  //TwoPoints
-                        //Application.ShowAlertDialog("Point 1: /n"+acPt1.ToString()+"Point 2: /n" + acPt2.ToString());
-                        //Extents3d abc = new Extents3d(acPt1, acPt2);
-                        //Application.ShowAlertDialog("OK");
-                        BlockTableRecord acBlkTblRecSpcCur = (BlockTableRecord)acTrans.GetObject(acCurDb.CurrentSpaceId, OpenMode.ForRead); //Current BlockTableRecord Layout
-                        //acLayoutCur = (Layout)acTrans.GetObject(acBlkTblRecSpcCur.LayoutId, OpenMode.ForRead);
-                        bool IsCheckedOk = false;
-                        foreach (ObjectId item in acBlkTblRecSpcCur)
+                        Point3d acPt1 = acSC.GetPoint3dFromPrompt(acDoc, "Pick first point");
+                        if (acPt1.Z != 50)
                         {
-                            Entity acEnt = (Entity)acTrans.GetObject(item, OpenMode.ForRead);
-                            if (acEnt is BlockReference)
+                            Point3d acPt2 = acSC.GetPoint3dFromPrompt(acDoc, "Pick second point");  //TwoPoints
+                            if (acPt2.Z != 50) 
                             {
-                                BlockReference acBlkRefArr = (BlockReference)acEnt;
-                                if (acBlkRefArr.Name.Equals(acFrm.txtBlkTblRecNam.Text))
+                                //Application.ShowAlertDialog("Point 1: /n"+acPt1.ToString()+"Point 2: /n" + acPt2.ToString());
+                                //Extents3d abc = new Extents3d(acPt1, acPt2);
+                                //Application.ShowAlertDialog("OK");
+                                BlockTableRecord acBlkTblRecSpcCur = (BlockTableRecord)acTrans.GetObject(acCurDb.CurrentSpaceId, OpenMode.ForRead); //Current BlockTableRecord Layout
+                                //acLayoutCur = (Layout)acTrans.GetObject(acBlkTblRecSpcCur.LayoutId, OpenMode.ForRead);
+                                bool IsCheckedOk = false;
+                                foreach (ObjectId item in acBlkTblRecSpcCur)
                                 {
-                                    Extents3d acExt3dArr = acSC.GetExtents3dFromInsertPointOfBlockReferenceAndTwoVectorsWithScale(acBlkRefArr, acVec3dOrgArr, acScl3dOrg);
-                                    //Application.ShowAlertDialog(acExt3dArr.ToString());
-                                    //Application.ShowAlertDialog("OK");
-                                    if (acSC.IsPoint3dInsideExtents3d(acExt3dArr, acPt1) || (acSC.IsPoint3dInsideExtents3d(acExt3dArr, acPt2)))
+                                    Entity acEnt = (Entity)acTrans.GetObject(item, OpenMode.ForRead);
+                                    if (acEnt is BlockReference)
                                     {
-                                        //Application.ShowAlertDialog("true");
-                                        IsCheckedOk = true;
-                                        acTxtVec3dOrgArr = acSC.GetTwoVectors3dDefinedExtents3d(acBlkRefArr, acPt1, acPt2, acScl3dOrg.X / acBlkRefArr.ScaleFactors.X);
+                                        BlockReference acBlkRefArr = (BlockReference)acEnt;
+                                        if (acBlkRefArr.Name.Equals(acFrm.txtBlkTblRecNam.Text))
+                                        {
+                                            Extents3d acExt3dArr = acSC.GetExtents3dFromInsertPointOfBlockReferenceAndTwoVectorsWithScale(acBlkRefArr, acVec3dOrgArr, acScl3dOrg);
+                                            //Application.ShowAlertDialog(acExt3dArr.ToString());
+                                            //Application.ShowAlertDialog("OK");
+                                            if (acSC.IsPoint3dInsideExtents3d(acExt3dArr, acPt1) || (acSC.IsPoint3dInsideExtents3d(acExt3dArr, acPt2)))
+                                            {
+                                                //Application.ShowAlertDialog("true");
+                                                IsCheckedOk = true;
+                                                acTxtVec3dOrgArr = acSC.GetTwoVectors3dDefinedExtents3d(acBlkRefArr, acPt1, acPt2, acScl3dOrg.X / acBlkRefArr.ScaleFactors.X);
+                                            }
+                                            //else Application.ShowAlertDialog("false");
+                                        }
+                                        //
                                     }
-                                    //else Application.ShowAlertDialog("false");
+                                    //if (IsCheckedOk) break;
                                 }
-                                //
-                            }
-                            //if (IsCheckedOk) break;
-                        }
-                        if (IsCheckedOk)
-                        {
-                            Extents3d acTxtExt3d = new Extents3d(acPt1, acPt2);
-                            DBObject acDbObj = acSC.GetTextInsideExtents3d(acDoc, acTrans, acTxtExt3d);
-                            if ((acDbObj is DBText) || (acDbObj is MText))
-                            {
-                                //if (acDbObj is DBText) Application.ShowAlertDialog(((DBText)acDbObj).TextString);
-                                //if (acDbObj is MText) Application.ShowAlertDialog(((MText)acDbObj).Contents);
-                                acFrm.txtTextPromptValidator.Text = acFrm.IsTextPromptInvalid[1];
-                                if (acFrm.rbtTextPrompt.Enabled == false) acFrm.rbtTextPrompt.Enabled = true;
-                            }
-                            else
-                            {
-                                Application.ShowAlertDialog("No Text was picked!");
-                                acFrm.txtTextPromptValidator.Text = acFrm.IsTextPromptInvalid[0];
-                                if (acFrm.rbtTextPrompt.Enabled == true) acFrm.rbtTextPrompt.Enabled = false;
-                                if (acFrm.rbtTextPrompt.Checked == true) acFrm.rbtIndex.Checked = true;
-                            }
+                                if (IsCheckedOk)
+                                {
+                                    Extents3d acTxtExt3d = new Extents3d(acPt1, acPt2);
+                                    DBObject acDbObj = acSC.GetTextInsideExtents3d(acDoc, acTrans, acTxtExt3d);
+                                    if ((acDbObj is DBText) || (acDbObj is MText))
+                                    {
+                                        //if (acDbObj is DBText) Application.ShowAlertDialog(((DBText)acDbObj).TextString);
+                                        //if (acDbObj is MText) Application.ShowAlertDialog(((MText)acDbObj).Contents);
+                                        acFrm.txtTextPromptValidator.Text = acFrm.IsTextPromptInvalid[1];
+                                        if (acFrm.rbtTextPrompt.Enabled == false) acFrm.rbtTextPrompt.Enabled = true;
+                                    }
+                                    else
+                                    {
+                                        Application.ShowAlertDialog("No Text was picked!");
+                                        acFrm.txtTextPromptValidator.Text = acFrm.IsTextPromptInvalid[0];
+                                        if (acFrm.rbtTextPrompt.Enabled == true) acFrm.rbtTextPrompt.Enabled = false;
+                                        if (acFrm.rbtTextPrompt.Checked == true) acFrm.rbtIndex.Checked = true;
+                                    }
 
-                        }
-                        else
-                        {
-                            Application.ShowAlertDialog("Windows Area was not inside a Block Name!");
-                            acFrm.txtTextPromptValidator.Text = acFrm.IsTextPromptInvalid[0];
-                            if (acFrm.rbtTextPrompt.Enabled == true) acFrm.rbtTextPrompt.Enabled = false;
-                            if (acFrm.rbtTextPrompt.Checked == true) acFrm.rbtIndex.Checked = true;
+                                }
+                                else
+                                {
+                                    Application.ShowAlertDialog("Windows Area was not inside a Block Name!");
+                                    acFrm.txtTextPromptValidator.Text = acFrm.IsTextPromptInvalid[0];
+                                    if (acFrm.rbtTextPrompt.Enabled == true) acFrm.rbtTextPrompt.Enabled = false;
+                                    if (acFrm.rbtTextPrompt.Checked == true) acFrm.rbtIndex.Checked = true;
+                                }
+                                //acFrm.ShowDialog();
+                            }
                         }
                         acFrm.IsButtonTextPromptClicked = false;
-                        //acFrm.ShowDialog();
                     }
                     acFrm.ShowDialog();
                 }

@@ -606,6 +606,7 @@ namespace Test
             PromptEntityOptions pEntOpt = new PromptEntityOptions("\n" + PromptMessage);
             pEntOpt.SetRejectMessage("\n" + PromptRejectMessage);
             pEntOpt.AddAllowedClass(typeof(BlockReference), true);
+            
             PromptEntityResult pEntRes = acDocEd.GetEntity(pEntOpt);
             if (pEntRes.Status == PromptStatus.OK)
             {
@@ -624,7 +625,7 @@ namespace Test
             }
             else
             {
-                Application.ShowAlertDialog("Bạn đã thoát lệnh!");
+                //Application.ShowAlertDialog("Bạn đã thoát lệnh!");
                 return null;
             }
         }
@@ -640,8 +641,8 @@ namespace Test
             }
             else
             {
-                Application.ShowAlertDialog("Bạn đã thoát lệnh!");
-                return new Point3d(0, 0, 0);
+                //Application.ShowAlertDialog("Bạn đã thoát lệnh!");
+                return new Point3d(50, 50, 50);
             }
         }
 

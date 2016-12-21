@@ -34,6 +34,7 @@ namespace Test
             rbtTextPrompt.Enabled = false;
             rbtAttribute.Enabled = false;
             rbtIndex.Checked = true;
+            btnCheck.Visible = false;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -51,7 +52,7 @@ namespace Test
 
         private void InputForm_Load(object sender, EventArgs e)
         {
-
+           
         }
         public void CreateAttributeDefinitionCollection()
         {
