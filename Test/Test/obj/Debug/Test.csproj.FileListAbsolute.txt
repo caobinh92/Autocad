@@ -10,3 +10,15 @@ E:\1. Work\1. Work\Autocad .net\C#\Test\Test\obj\Debug\Test.dll
 E:\1. Work\1. Work\Autocad .net\C#\Test\Test\obj\Debug\Interop.ACSMCOMPONENTS21Lib.dll
 E:\1. Work\1. Work\Autocad .net\C#\Test\Test\obj\Debug\Interop.AXDBLib.dll
 E:\1. Work\1. Work\Autocad .net\C#\Test\Test\obj\Debug\Test.csproj.ResolveComReference.cache
+E:\1. Work\Git\C#\Test\Test\bin\Debug\Test.dll.config
+E:\1. Work\Git\C#\Test\Test\bin\Debug\Test.dll
+E:\1. Work\Git\C#\Test\Test\bin\Debug\Test.pdb
+E:\1. Work\Git\C#\Test\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+E:\1. Work\Git\C#\Test\Test\obj\Debug\Interop.ACSMCOMPONENTS21Lib.dll
+E:\1. Work\Git\C#\Test\Test\obj\Debug\Interop.AXDBLib.dll
+E:\1. Work\Git\C#\Test\Test\obj\Debug\Test.csproj.ResolveComReference.cache
+E:\1. Work\Git\C#\Test\Test\obj\Debug\Test.ChangeForm.resources
+E:\1. Work\Git\C#\Test\Test\obj\Debug\Test.InputForm.resources
+E:\1. Work\Git\C#\Test\Test\obj\Debug\Test.csproj.GenerateResource.Cache
+E:\1. Work\Git\C#\Test\Test\obj\Debug\Test.dll
+E:\1. Work\Git\C#\Test\Test\obj\Debug\Test.pdb
